@@ -32,8 +32,6 @@
 
                             <div class="card-body">
                                 <input type="hidden" name="id_form" value="<?php echo $form->id_form; ?>">
-                                <input type="hidden" name="tanggal" value="<?php echo date('Y-m-d'); ?>">
-                                <input type="hidden" name="waktu" value="<?php echo date('H:i:s'); ?>">
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Form</label>
                                     <div class="col-sm-12 col-md-7"><input type="text" class="form-control" value="<?php echo $form->nama_form; ?>" readonly></div>
@@ -48,7 +46,10 @@
                                 </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kelas</label>
-                                    <div class="col-sm-12 col-md-7"><input type="text" name="kelas" class="form-control"></div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" name="kelas" class="form-control">
+                                        <small class="form-text text-muted">Format: kelas-jurusan-nomor; Contoh: X-IPA-1</small>
+                                    </div>
                                 </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>

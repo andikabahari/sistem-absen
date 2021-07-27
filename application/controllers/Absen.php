@@ -72,9 +72,7 @@ class Absen extends CI_Controller {
         $this->form_validation->set_rules('id_form', 'Id Form', 'required|numeric');
         $this->form_validation->set_rules('nis', 'NIS', 'required|exact_length[10]|numeric');
         $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'required|max_length[100]');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required|max_length[10]');
-        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required|regex_match[/^\d{1,4}-\d{1,2}-\d{1,2}$/]');
-        $this->form_validation->set_rules('waktu', 'Waktu', 'required|regex_match[/^\d{1,2}:\d{1,2}:\d{1,2}$/]');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|max_length[10]|regex_match[/^[x|X]{1}[i|I]{0,2}-[a-zA-Z]+-\d+$/]');
 
         if ( ! $this->form_validation->run())
         {
@@ -92,10 +90,7 @@ class Absen extends CI_Controller {
             redirect('absen/form/' . $encoded_id);
         }
 
-        $tanggal = $this->input->post('tanggal');
-        $waktu = $this->input->post('waktu');
         $waktu_absen = date('Y-m-d H:i:s');
-
         $data = array(
             'id_form' => $this->input->post('id_form'),
             'nis' => $this->input->post('nis'),
