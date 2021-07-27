@@ -61,7 +61,7 @@
                                                         <td><?php echo $row->tahun_pelajaran; ?></td>
                                                         <td><?php echo $row->semester; ?></td>
                                                         <td><?php echo $row->jumlah_absen; ?></td>
-                                                        <td><a href="<?php echo site_url('absen/show/' . $row->id_absen); ?>" class="btn btn-info">Detail</a></td>
+                                                        <td><a href="<?php echo site_url('absen/show/' . $row->id_form); ?>" class="btn btn-info">Detail</a></td>
                                                     </tr>
 
                                                 <?php endforeach; ?>

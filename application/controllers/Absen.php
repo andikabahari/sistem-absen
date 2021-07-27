@@ -26,7 +26,7 @@ class Absen extends CI_Controller {
         {
             redirect('absen');
         }
-
+        
         if ($form->nip != $this->auth_lib->nip())
         {
             redirect('absen');
@@ -71,7 +71,7 @@ class Absen extends CI_Controller {
 
         $this->form_validation->set_rules('id_form', 'Id Form', 'required|numeric');
         $this->form_validation->set_rules('nis', 'NIS', 'required|exact_length[10]|numeric');
-        $this->form_validation->set_rules('nama_siswa', 'Nama Lengkap', 'required|max_length[100]');
+        $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'required|max_length[100]');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required|max_length[10]');
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required|regex_match[/^\d{1,4}-\d{1,2}-\d{1,2}$/]');
         $this->form_validation->set_rules('waktu', 'Waktu', 'required|regex_match[/^\d{1,2}:\d{1,2}:\d{1,2}$/]');
@@ -94,8 +94,8 @@ class Absen extends CI_Controller {
 
         $tanggal = $this->input->post('tanggal');
         $waktu = $this->input->post('waktu');
-        $waktu_absen = $tanggal . ' ' . $waktu;
-        
+        $waktu_absen = date('Y-m-d H:i:s');
+
         $data = array(
             'id_form' => $this->input->post('id_form'),
             'nis' => $this->input->post('nis'),
@@ -106,7 +106,11 @@ class Absen extends CI_Controller {
 
         $this->absen_model->insert($data);
 
-        $this->session->set_flashdata('success_message', 'Absen berhasil disimpan.');
+        $is_exceeding_time_limit = strtotime($waktu_absen) > strtotime($form->batas_waktu);
+        $message_type = $is_exceeding_time_limit ? 'warning_message' : 'success_message';
+        $message_text = $is_exceeding_time_limit ? 'Absen tidak tersimpan karena sudah melibihi batas waktu.' : 'Absen berhasil disimpan.';
+        
+        $this->session->set_flashdata($message_type, $message_text);
 
         redirect('absen/form/' . $encoded_id);
     }
