@@ -95,14 +95,7 @@ class Absen extends CI_Controller {
         $tanggal = $this->input->post('tanggal');
         $waktu = $this->input->post('waktu');
         $waktu_absen = $tanggal . ' ' . $waktu;
-
-        if (strtotime($waktu_absen) > strtotime($form->batas_waktu))
-        {
-            $this->session->set_flashdata('error_message', 'Absen gagal disimpan.');
-
-            redirect('absen/form/' . $encoded_id);
-        }
-
+        
         $data = array(
             'id_form' => $this->input->post('id_form'),
             'nis' => $this->input->post('nis'),
