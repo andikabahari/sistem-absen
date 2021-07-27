@@ -67,7 +67,7 @@
                                                             <a href="<?php echo site_url('form/delete/' . $row->id_form); ?>" class="btn btn-danger" onclick="return confirmDelete()">Hapus</a>
                                                         </td>
                                                     </tr>
-
+                                                    
                                                 <?php endforeach; ?>
                                                 
                                             </tbody>
